@@ -1,0 +1,158 @@
+.info-grid-container {
+  display: grid;
+  position: relative;
+  overflow: hidden;
+  width: auto;
+  margin: -65px auto;
+}
+
+.header-pos {
+  margin-left: 3px;
+  margin-top: 67px;
+  font-size: 80px;
+}
+
+.content-pos {
+  margin-left: 3px;
+  max-width: 80em;
+  font-size: 20px;
+  overflow-x: auto;
+}
+
+.single-line {
+  margin-left: 0px;
+  width: 900px;
+  overflow-x: auto;
+}
+
+.card {
+  border: #595555;
+  cursor: pointer;
+  border-style: solid;
+  width: 40%;
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+.nav-grid-container {
+  height: 100vh;
+  width: 350px;
+  position: fixed;
+  z-index: 1;
+  top: 0px;
+  left: 0px;
+  background-color: #354db8;
+  overflow-x: auto;
+}
+
+.sub-header-size {
+  font-size: 30px
+}
+
+.img-pos-nav {
+  padding-top: 40px;
+}
+
+.logo {
+  height: 193px;
+  width: 216px;
+  margin-left: -32px;
+  margin-top: -22px;
+}
+
+.logo-pos {
+  margin: 0 auto;
+  height: 150px;
+  width: 150px;
+}
+
+.nav-items {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.nav-dec {
+  height: 70px;
+}
+
+.nav-pos {
+  padding-top: 30px;
+  padding-left: 20px;
+  transition: 0.3s;
+}
+
+.nav-pos:hover {
+  color: #04baae;
+  padding-left: 50px;
+  transition: 0.3s;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+
+/*Search bar stuff*/
+.search {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #00B4CC;
+  border-right: none;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus{
+  color: #00B4CC;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #00B4CC;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.wrap{
+  width: 20%;
+  position: absolute;
+  top: 35%;
+  left: 85%;
+  transform: translate(-50%, -50%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: #f6f6f6;
+    background-color: #2f2f2f;
+  }
+
+  a:hover {
+    color: #24c8db;
+  }
+
+  input,
+  button {
+    color: #ffffff;
+    background-color: #0f0f0f98;
+  }
+  button:active {
+    background-color: #0f0f0f69;
+  }
+}
