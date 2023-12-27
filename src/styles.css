@@ -25,16 +25,19 @@
   overflow-x: auto;
 }
 
-.card {
+/* .card {
+  display: inline-grid;
   border: #595555;
   cursor: pointer;
   border-style: solid;
-  width: 40%;
-}
+  width: 350px;
+  height: 350px;
+  margin-right: 20px;
+} */
 
-.container {
+/* .container {
   padding: 2px 16px;
-}
+} */
 
 .nav-grid-container {
   height: 100vh;
@@ -89,11 +92,11 @@
   transition: 0.3s;
 }
 
-a {
-  text-decoration: none;
-  color: white;
+h4{
+  color: black;
+  text-align: center;
+  font-size: 15px;
 }
-
 
 /*Search bar stuff*/
 .search {
@@ -118,7 +121,7 @@ a {
 }
 
 .searchButton {
-  width: 40px;
+  width: 90px;
   height: 36px;
   border: 1px solid #00B4CC;
   background: #00B4CC;
