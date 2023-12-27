@@ -11,10 +11,13 @@
   },
   "tauri": {
     "allowlist": {
-      "all": false,
+      "all": true,
       "shell": {
         "all": false,
         "open": true
+      },
+      "fs": {
+        "scope": ["$APPDATA/*", "$DESKTOP/*", "$DESKTOP/Rom-Manager/ROMS/GBA/*"]
       }
     },
     "bundle": {

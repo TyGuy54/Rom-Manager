@@ -14,7 +14,7 @@
 
 .content-pos {
   margin-left: 3px;
-  max-width: 80em;
+  max-width: 90em;
   font-size: 20px;
   overflow-x: auto;
 }
@@ -24,20 +24,6 @@
   width: 900px;
   overflow-x: auto;
 }
-
-/* .card {
-  display: inline-grid;
-  border: #595555;
-  cursor: pointer;
-  border-style: solid;
-  width: 350px;
-  height: 350px;
-  margin-right: 20px;
-} */
-
-/* .container {
-  padding: 2px 16px;
-} */
 
 .nav-grid-container {
   height: 100vh;
@@ -138,6 +124,25 @@ h4{
   top: 35%;
   left: 85%;
   transform: translate(-50%, -50%);
+}
+
+nav{
+  width: 100%;
+  position: fixed;
+  top:50px;
+  text-align:center;
+}
+nav a{
+  font-family: 'Oswald', sans-serif;
+  font-weight:500;
+  text-transform:uppercase;
+  text-decoration:none;
+  color:#16151b;
+  margin:0 15px;
+  font-size:16px;
+  letter-spacing:1px;
+  position:relative;
+  display:inline-block;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { copyFile, BaseDirectory } from '@tauri-apps/api/fs';
 import { invoke } from "@tauri-apps/api/tauri";
 import "./App.css";
 import "./card.css";
@@ -6,6 +7,7 @@ import "./card.css";
 function App() {
   const [cardDatas, setCardData] = useState([]);
   const [romImgs, setRomImgs] = useState([]);
+  const [file, setFile] = useState();
 
   useEffect(() => {
     async function cardData() {
@@ -42,11 +44,11 @@ function App() {
             return (
               <img
                 src={img_path[pth]}
-                class="card__image"
+                className="card__image"
                 alt="rom img"
               />
             );
-          } 
+          }
         });
       });
     });
@@ -66,6 +68,7 @@ function App() {
                 onClick={(e) => {
                   e.preventDefault();
                   loadRom(path[obj]);
+                  console.log(path[obj])
                 }}
               >
                 {Object.keys(name).map((obj, i) => {
@@ -77,7 +80,6 @@ function App() {
                   <div className="card__header">
                     <div className="card__header-text">
                       <h3 className="card__title">Game Boy Advanced</h3>
-                      {/* <span className="card__status">1 hour ago</span> */}
                     </div>
                   </div>
                   <div className="container">
@@ -94,22 +96,33 @@ function App() {
     });
   };
 
+const move_file = async (file) => {
+  await copyFile(file, `Rom-Manager/ROMS/GBA/${file}`, { dir: BaseDirectory.Desktop });
+ }
+
   return (
-    <div className="info-grid-container">
-      <h2 className="header-pos">Rom Manager</h2>
+    <>
+      <div className="info-grid-container">
+        <h2 className="header-pos">Rom Manager</h2>
+        <nav>
+          <input type="file" onChange={(e) => setFile(e.target.files[0].name)}/>
+          <button type="submit" onClick={() => move_file(file)}>Upload</button>
+          <a href="#">about</a>
+        </nav>
 
-      {/* <div className="wrap">
-        <div className="search">
-          <input type="text" className="searchTerm" placeholder="What are you looking for?"/>
-          <button type="submit" className="searchButton">search</button>
+        {/* <div className="wrap">
+          <div className="search">
+            <input type="text" className="searchTerm" placeholder="What are you looking for?"/>
+            <button type="submit" className="searchButton">search</button>
+          </div>
+        </div> */}
+
+        <div className="content-pos">
+          <ul className="cards">{makeCards()}</ul>
+          {/* <button onClick={(e) => move_file()}>click me</button> */}
         </div>
-      </div> */}
-
-      <div className="content-pos">
-        <ul className="cards">{makeCards()}</ul>
-
       </div>
-    </div>
+    </>
   );
 }
 
