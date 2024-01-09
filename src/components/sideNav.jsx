@@ -3,6 +3,11 @@ import { IconContext } from "react-icons";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { SidebarData } from "./lib/sideNavData";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from "react-router-dom";
 import "./css/nav.css";
 
 export const Sidenav = () => {
@@ -33,10 +38,10 @@ export const Sidenav = () => {
             {SidebarData.map((item, index) => {
               return (
                 <li key={index} className={item.cName}>
-                  <a href={item.path}>
+                  <Link to={item.path}>
                     {/* {item.icon} */}
                     <span>{item.title}</span>
-                  </a>
+                  </Link>
                 </li>
               );
             })}

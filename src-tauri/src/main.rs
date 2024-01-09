@@ -70,6 +70,33 @@ fn get_img_data() -> Result<Vec<HashMap<&'static str, Value>>, Error> {
     return Ok(cool_vec);
 }
 
+
+fn change_dir(extn: Option<&str>) -> PathBuf {
+    // if extn != Some("gba") | Some("sav") {
+    //     let new_extn = extn.unwrap().to_uppercase();
+    //     let new_path = format!("..ROMS/{new_extn}");
+
+    //     println!("{}", new_path);
+
+    //     return Ok(PathBuf::from(new_path))
+    // } else {
+    //     return Err(());
+    // }
+
+
+    match extn {
+        Some("nes") => {
+            let new_extn = extn.unwrap().to_uppercase();
+            let new_path = format!("..ROMS/{new_extn}");
+            println!("{}", new_path);
+
+            return PathBuf::from(new_path)
+        },
+        _ => {PathBuf::from("")}
+    }
+
+} 
+
 // a funtion that makes a vector wth a hashmap inside of it 
 // loops over the ROMS/GBA directory and grabs every roms and its path and appends it to the hashmap
 #[tauri::command]
@@ -87,60 +114,44 @@ fn get_rom_data() -> Result<Vec<HashMap<&'static str, Value>>, Error>{
         let rom_file_extension = Path::new(rom_path.as_os_str())
             .extension()
             .and_then(OsStr::to_str);
+
+
+        change_dir(rom_file_extension);
         
-        match rom_file_extension.unwrap() {
-            "gba" => { 
-                card_data_payload.insert("rom_path", Value::Path(rom_path.clone()));
-                card_data_payload.insert("rom_name", Value::Name(rom_name.into_string().unwrap()));
-                
-                let file_extention = rom_file_extension.unwrap().to_string();
-                let remove_dot = file_extention.replace(".", "");
-                let to_upper = remove_dot.to_uppercase();
-                
-                card_data_payload.insert("rom_extn", Value::NameExtn(to_upper));
+        if let Some(extension) = rom_file_extension {
+            match extension {
+                "gba" | "nes" | "gb" | "gbc" => {
+                    if rom_file_extension == Some("nes") {
+                        let new_path = rom_path.clone().to_string_lossy().to_string().replace("GBA", "NES");
 
-                cool_vec.push(card_data_payload)
-            },
-            "nes" => {
-                card_data_payload.insert("rom_path", Value::Path(rom_path.clone()));
-                card_data_payload.insert("rom_name", Value::Name(rom_name.into_string().unwrap()));
+                        card_data_payload.insert("rom_path", Value::Path(PathBuf::from(new_path)));
+                        card_data_payload.insert("rom_name", Value::Name(rom_name.into_string().unwrap()));
+                        
+                        let file_extention = rom_file_extension.unwrap().to_string();
+                        let remove_dot = file_extention.replace(".", "");
+                        let to_upper = remove_dot.to_uppercase();
+                        
+                        card_data_payload.insert("rom_extn", Value::NameExtn(to_upper));
 
-                let file_extention = rom_file_extension.unwrap().to_string();
-                let remove_dot = file_extention.replace(".", "");
-                let to_upper = remove_dot.to_uppercase();
-                
-                card_data_payload.insert("rom_extn", Value::NameExtn(to_upper));
+                        cool_vec.push(card_data_payload)
+                    } else {
+                        card_data_payload.insert("rom_path", Value::Path(rom_path.clone()));
+                        card_data_payload.insert("rom_name", Value::Name(rom_name.into_string().unwrap()));
+                        
+                        let file_extention = rom_file_extension.unwrap().to_string();
+                        let remove_dot = file_extention.replace(".", "");
+                        let to_upper = remove_dot.to_uppercase();
+                        
+                        card_data_payload.insert("rom_extn", Value::NameExtn(to_upper));
 
-                cool_vec.push(card_data_payload)
-            },
-            "gb" => {
-                card_data_payload.insert("rom_path", Value::Path(rom_path.clone()));
-                card_data_payload.insert("rom_name", Value::Name(rom_name.into_string().unwrap()));
-
-                let file_extention = rom_file_extension.unwrap().to_string();
-                let remove_dot = file_extention.replace(".", "");
-                let to_upper = remove_dot.to_uppercase();
-                
-                card_data_payload.insert("rom_extn", Value::NameExtn(to_upper));
-
-                cool_vec.push(card_data_payload)
-            },
-            "gbc" => {
-                card_data_payload.insert("rom_path", Value::Path(rom_path.clone()));
-                card_data_payload.insert("rom_name", Value::Name(rom_name.into_string().unwrap()));
-
-                let file_extention = rom_file_extension.unwrap().to_string();
-                let remove_dot = file_extention.replace(".", "");
-                let to_upper = remove_dot.to_uppercase();
-                
-                card_data_payload.insert("rom_extn", Value::NameExtn(to_upper));
-
-                cool_vec.push(card_data_payload)
-            },
-            _ => {}
+                        cool_vec.push(card_data_payload)
+                    }
+                }
+                _ => {}
+            }
         }
     }
-    
+
     return Ok(cool_vec);
 }
 
