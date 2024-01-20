@@ -13,7 +13,7 @@ export const GBA = () => {
       // calls a function from the back end to get data to make cards
       async function romData() {
         // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-        setRomData(await invoke("get_rom_data", {}));
+        setRomData(await invoke("get_rom_data", {romType: "GBA"}));
       }
   
       // calls a function from the back end to get imgs from the backend
@@ -26,23 +26,18 @@ export const GBA = () => {
     }, []);
   
     const getFileExtn = () => {
+      console.log(romData)
       return romData.map((data) => {
-        let fileExtn = data.rom_extn;
-        return Object.keys(fileExtn).map((extn) => {
-            return fileExtn[extn];
-        });
+          return data.file_extension
       });
-    };
-
-
-    console.log(getFileExtn())
+  };
 
     // a funtion that copies a file from the desktop to the ROM/GBA folder
-    const moveFile = async (file) => {
-        await copyFile(file, `Rom-Manager/ROMS/${getFileExtn()[0][0]}/${file}`, {
-        dir: BaseDirectory.Desktop,
-        });
-    };
+    // const moveFile = async (file) => {
+    //     await copyFile(file, `Rom-Manager/ROMS/${getFileExtn()[0][0]}/${file}`, {
+    //     dir: BaseDirectory.Desktop,
+    //     });
+    // };
 
     return (
         <>

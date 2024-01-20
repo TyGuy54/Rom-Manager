@@ -13,7 +13,7 @@ export const NES = () => {
       // calls a function from the back end to get data to make cards
       async function romData() {
         // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-        setRomData(await invoke("get_rom_data", {}));
+        setRomData(await invoke("get_rom_data", {romType: "NES"}));
       }
   
       // calls a function from the back end to get imgs from the backend
@@ -24,26 +24,21 @@ export const NES = () => {
       romData().catch(console.error);
       getImgs().catch(console.error);
     }, []);
-  
-    const getFileExtn = () => {
-      return romData.map((data) => {
-        let fileExtn = data.rom_extn;
-        if (fileExtn.NameExtn === 'NES') {
-            return Object.keys(fileExtn).map((extn) => {
-                return fileExtn[extn];
-            });
-        } else {
-            return "NONE"
-        }
-      });
-    };
+    
 
-    // a funtion that copies a file from the desktop to the ROM/NES folder
-    const moveFile = async (file) => {
-        await copyFile(file, `Rom-Manager/ROMS/${getFileExtn()[0]}/${file}`, {
-            dir: BaseDirectory.Desktop,
+    const getFileExtn = () => {
+        console.log(romData)
+        return romData.map((data) => {
+            return data.file_extension
         });
     };
+
+    // // a funtion that copies a file from the desktop to the ROM/NES folder
+    // const moveFile = async (file) => {
+    //     await copyFile(file, `Rom-Manager/ROMS/${getFileExtn()[0][0]}/${file}`, {
+    //         dir: BaseDirectory.Desktop,
+    //     });
+    // };
 
     return (
         <>
