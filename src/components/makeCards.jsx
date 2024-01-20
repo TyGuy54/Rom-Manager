@@ -12,7 +12,7 @@ export const Cards = (props) => {
       return Object.keys(img_name).map((img) => {
         return Object.keys(img_path).map((pth, i) => {
           let extn = props.romExtn
-          if (img_name[img].replace(".jpg", "") == romName.replace(`.${extn[0][0].toLowerCase()}`, "")) {
+          if (img_name[img].replace(".jpg", "") == romName.replace(`.${extn[0]["NameExtn"].toLowerCase()}`, "")) {
             return (
               <img
                 src={img_path[pth]}
@@ -30,12 +30,13 @@ export const Cards = (props) => {
   // a function that takes an array[object] from the back end and uses that data to make cards for the rom
   const makeCards = () => {
     return props.cardData.map((data, i) => {
-      let path = data.rom_path;
-      let name = data.rom_name;
+      let path = data.file_location;
+      let name = data.file_name;
       // I have to use [Object.keys()] becuase when useing the object in the array
       // its looks likes this -> {String: "some roms name"} and useing dot notation
       // throws an error of undifind.
       return Object.keys(path).map((obj, i) => {
+        console.log(obj)
         return (
           <>
             <li>
@@ -46,7 +47,6 @@ export const Cards = (props) => {
                   e.preventDefault();
                   loadRom(path[obj]);
                   props.roms;
-                  // console.log(path[obj])
                 }}
               >
                 {Object.keys(name).map((obj) => {

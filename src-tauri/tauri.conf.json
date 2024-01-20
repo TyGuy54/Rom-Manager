@@ -17,7 +17,7 @@
         "open": true
       },
       "fs": {
-        "scope": ["$APPDATA/*", "$DESKTOP/*", "$DESKTOP/Rom-Manager/ROMS/GBA/*"]
+        "scope": ["$APPDATA/*", "$DESKTOP/*", "$DESKTOP/Rom-Manager/ROMS/GBA/*", "$DESKTOP/Rom-Manager/ROMS/NES/*"]
       }
     },
     "bundle": {

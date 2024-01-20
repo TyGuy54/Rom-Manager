@@ -6,37 +6,37 @@ import * as IoIcons from 'react-icons/io';
 export const SidebarData = [
   {
     title: 'Home',
-    path: '#',
+    path: '/',
     // icon: <AiIcons.AiFillHome />,
     cName: 'nav-text'
   },
   {
     title: 'NES',
-    path: '#',
+    path: '/nes',
     // icon: <IoIcons.IoIosPaper />,
     cName: 'nav-text'
   },
   {
     title: 'SNES',
-    path: '*',
+    path: '/snes',
     // icon: <FaIcons.FaCartPlus />,
     cName: 'nav-text'
   },
   {
     title: 'GB',
-    path: '#',
+    path: 'gb',
     // icon: <IoIcons.IoMdPeople />,
     cName: 'nav-text'
   },
   {
     title: 'GBC',
-    path: '/messages',
+    path: '/gbc',
     // icon: <FaIcons.FaEnvelopeOpenText />,
     cName: 'nav-text'
   },
   {
     title: 'GBA',
-    path: '#',
+    path: 'gba',
     // icon: <IoIcons.IoMdHelpCircle />,
     cName: 'nav-text'
   }
