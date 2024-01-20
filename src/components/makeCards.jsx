@@ -30,13 +30,13 @@ export const Cards = (props) => {
   // a function that takes an array[object] from the back end and uses that data to make cards for the rom
   const makeCards = () => {
     return props.cardData.map((data, i) => {
+      let fileExtn = data.file_extension["NameExtn"]
       let path = data.file_location;
       let name = data.file_name;
       // I have to use [Object.keys()] becuase when useing the object in the array
       // its looks likes this -> {String: "some roms name"} and useing dot notation
       // throws an error of undifind.
       return Object.keys(path).map((obj, i) => {
-        console.log(obj)
         return (
           <>
             <li>
@@ -55,7 +55,7 @@ export const Cards = (props) => {
                 <div className="card__overlay" key={i}>
                   <div className="card__header">
                     <div className="card__header-text">
-                      <h3 className="card__title">Game Boy Advanced</h3>
+                      <h3 className="card__title">{fileExtn}</h3>
                     </div>
                   </div>
                   <div className="container">
