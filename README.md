@@ -19,19 +19,19 @@ To get started with ROM Organizer, follow these simple steps:
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/rom-organizer.git
+   git clone https://github.com/TyGuy54/Rom-Manager.git
 
 2. **Navigate to the Project Directory:**
    ```bash
-   cd rom-organizer
+   cd Rom-Manager
 
 3. **Install Dependencies:**
    ```bash
-   # Add installation commands for any project dependencies
+   npm i 
 
 4. **Run the Application:**
    ```bash
-   # Add commands to start the application
+   npm run tauri dev    
 
 
 ## Contributing
