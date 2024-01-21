@@ -26,18 +26,17 @@ export const GBA = () => {
     }, []);
   
     const getFileExtn = () => {
-      console.log(romData)
       return romData.map((data) => {
           return data.file_extension
       });
   };
 
-    // a funtion that copies a file from the desktop to the ROM/GBA folder
-    // const moveFile = async (file) => {
-    //     await copyFile(file, `Rom-Manager/ROMS/${getFileExtn()[0][0]}/${file}`, {
-    //     dir: BaseDirectory.Desktop,
-    //     });
-    // };
+  /// a funtion that copies a file from the desktop to the ROM/GBA folder
+  const moveFile = async (file) => {
+    await copyFile(file, `Rom-Manager/ROMS/${getFileExtn()[0]["NameExtn"]}/${file}`, {
+    dir: BaseDirectory.Desktop,
+    });
+};
 
     return (
         <>
@@ -45,7 +44,7 @@ export const GBA = () => {
             <div>
             <input
                 type="file"
-                onChange={(e) =>setFile(e.target.files[0].name)}
+                onChange={(e) => setFile(e.target.files[0].name)}
             />
             <button className="btn" type="submit" onClick={() => moveFile(file)}>
                 Upload

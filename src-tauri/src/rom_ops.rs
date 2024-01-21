@@ -1,11 +1,13 @@
 use std::fs;
-use std::path::{Path, PathBuf};
 use std::ffi::OsStr;
+use std::string::String;
 use std::process::Command;
 use std::collections::HashMap;
-use std::string::String;
+use std::path::{Path, PathBuf};
 use serde::{Deserialize, Serialize};
+
 use crate::error::Error;
+use crate::util::rom_store::RomStore;
 
 
 // while appending the values to hashmaps in the [get_imgs] and [card_data]
@@ -19,50 +21,15 @@ pub enum Value {
 }
 
 #[derive(Debug, Clone, Eq, PartialEq, Hash)] 
-enum RomType {
+pub enum RomType {
     Rom,
 }
 
 #[derive(Debug, Clone, Serialize)] // Derive Debug and Clone traits for RomData
 pub struct RomData {
-    file_location: Value,
-    file_extension: Value,
-    file_name: Value,
-}
-
-struct RomStore {
-    roms: HashMap<RomType, Vec<RomData>>,
-}
-
-impl RomStore {
-    // Function to add ROM data to the store
-    fn add_rom(&mut self, rom_type: RomType, rom_data: RomData) {
-        let rom_type_entry = self.roms.entry(rom_type).or_insert(Vec::new());
-
-        // Retain only entries with file extensions other than "sav" or "SAV"
-        rom_type_entry.retain(|existing_rom_data| {
-            match (&existing_rom_data.file_extension, &rom_data.file_extension) {
-                (Value::NameExtn(extn1), Value::NameExtn(extn2)) => {
-                    extn1.to_lowercase() != "sav" || extn2.to_lowercase() != "sav"
-                }
-                _ => true,
-            }
-        });
-
-        // Check if the new entry has a file extension "sav" or "SAV"
-        if let Value::NameExtn(extn) = &rom_data.file_extension {
-            if extn.to_lowercase() != "sav" {
-                rom_type_entry.push(rom_data);
-            }
-        } else {
-            rom_type_entry.push(rom_data);
-        }
-    }
-
-    // Function to retrieve ROM data for a specific type
-    fn get_roms(&self, rom_type: RomType) -> Option<&Vec<RomData>> {
-        self.roms.get(&rom_type)
-    }
+    pub file_location: Value,
+    pub file_extension: Value,
+    pub file_name: Value,
 }
 
 // a function runs the open command to run the rom in its emulator

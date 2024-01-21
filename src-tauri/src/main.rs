@@ -6,6 +6,7 @@ use rom_ops::{load_rom, get_rom_data, get_img_data};
 
 mod error;
 mod rom_ops;
+mod util;
 
 
 fn main() {
