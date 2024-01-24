@@ -67,7 +67,7 @@ pub fn get_img_data() -> Result<Vec<HashMap<&'static str, Value>>, Error> {
 // a funtion that makes a vector wth a hashmap inside of it 
 // loops over the ROMS/GBA directory and grabs every roms and its path and appends it to the hashmap
 #[tauri::command]
-pub fn get_rom_data(rom_type: String) -> Result<Vec<RomData>, Error> {
+pub fn get_rom_data(rom_type: String) -> Result<Vec<RomData>, ()> {
     let paths = fs::read_dir(format!("../ROMS/{}", rom_type)).unwrap();
 
     let mut rom_store = RomStore {
@@ -99,5 +99,18 @@ pub fn get_rom_data(rom_type: String) -> Result<Vec<RomData>, Error> {
 
     }
     
-    return Ok(rom_store.get_roms(RomType::Rom).unwrap().to_owned());
+    // handles the case when [rom_store.get_roms(RomType::Rom)] returns None
+    // makes it so the app dose not crash
+    let result = rom_store.get_roms(RomType::Rom)
+        .map(|roms| {
+            if !roms.is_empty() {
+                Ok(roms.to_owned())
+            } else {
+                Err(())
+            }
+        })
+        .unwrap_or_else(|| Err(()));
+
+return result;
+
 }

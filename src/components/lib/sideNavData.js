@@ -24,7 +24,7 @@ export const SidebarData = [
   },
   {
     title: 'GB',
-    path: 'gb',
+    path: '/gb',
     // icon: <IoIcons.IoMdPeople />,
     cName: 'nav-text'
   },
@@ -36,7 +36,7 @@ export const SidebarData = [
   },
   {
     title: 'GBA',
-    path: 'gba',
+    path: '/gba',
     // icon: <IoIcons.IoMdHelpCircle />,
     cName: 'nav-text'
   }
